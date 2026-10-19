@@ -1,0 +1,6 @@
+codice;titolo;data;venue;prezzi
+A-501;Notte Rock al Club;14/05/2030 21:30;v-club;PIT=22,00
+A-502;Sinfonie d'Estate;02/07/2030 21:00;v-arena;PIT=35,00|A=59,90|B=29,90
+A-503;;10/07/2030 21:00;v-arena;PIT=10,00
+A-504;Data Sbagliata;31/02/2019 21:00;v-club;PIT=15,00
+A-505;Locale Inesistente;10/08/2030 21:00;v-stadio;PIT=40,00

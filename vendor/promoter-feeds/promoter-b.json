@@ -1,0 +1,35 @@
+{
+  "events": [
+    {
+      "ref": "B-900",
+      "name": "Commedia in Tre Atti",
+      "startsAt": "2030-11-05T20:45:00+01:00",
+      "venueCode": "v-teatro",
+      "prices": [
+        { "sector": "PLATEA", "amount": 32 },
+        { "sector": "GALLERIA", "amount": 18 }
+      ]
+    },
+    {
+      "ref": "B-901",
+      "name": "Gala di Capodanno",
+      "startsAt": "2030-12-31T22:00:00+01:00",
+      "venueCode": "v-teatro",
+      "prices": [{ "sector": "PLATEA", "amount": 120 }]
+    },
+    {
+      "ref": "B-902",
+      "name": "Recital al Palazzetto",
+      "startsAt": "2030-10-01T21:00:00+02:00",
+      "venueCode": "v-palazzetto",
+      "prices": [{ "sector": "PIT", "amount": 28 }]
+    },
+    {
+      "ref": "B-903",
+      "name": "",
+      "startsAt": "2030-10-02T21:00:00+02:00",
+      "venueCode": "v-club",
+      "prices": [{ "sector": "PIT", "amount": 12 }]
+    }
+  ]
+}

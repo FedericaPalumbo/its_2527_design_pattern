@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed promoter="C">
+  <evento codice="C-77">
+    <titolo>Electro Garage</titolo>
+    <quando>2030-09-19T23:00:00+02:00</quando>
+    <sede>v-club</sede>
+    <prezzo settore="PIT">16.50</prezzo>
+  </evento>
+  <evento codice="C-78">
+    <titolo>Quartetto d&apos;Archi</titolo>
+    <quando>2030-10-03T20:30:00+02:00</quando>
+    <sede>v-teatro</sede>
+    <prezzo settore="PLATEA">27.00</prezzo>
+    <prezzo settore="GALLERIA">15.00</prezzo>
+  </evento>
+</feed>
