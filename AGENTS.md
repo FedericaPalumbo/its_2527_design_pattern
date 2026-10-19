@@ -2,7 +2,7 @@
 
 ## Il progetto
 
-TicketHub vende biglietti per concerti ed eventi. È un'applicazione NestJS 11 su Express, scritta in TypeScript, senza database: i dati stanno in repository in memoria e ripartono dal seed a ogni avvio.
+TicketHub vende biglietti per concerti ed eventi. È un'applicazione NestJS 12 su Express in CommonJS, scritta in TypeScript, senza database: i dati stanno in repository in memoria e ripartono dal seed a ogni avvio.
 
 Il codice ha qualche anno e diversi problemi noti, elencati in `DEBITO.md`. Le regole qui sotto valgono per il codice nuovo e per quello che si modifica. Il resto si sistema un ticket alla volta.
 
@@ -29,7 +29,7 @@ Il codice ha qualche anno e diversi problemi noti, elencati in `DEBITO.md`. Le r
 | `npm test` | Test unitari con Jest (`src/**/*.spec.ts`) |
 | `npm run test:e2e` | Test e2e con Jest e supertest (`test/**/*.e2e-spec.ts`) |
 | `npm run typecheck` | Controllo dei tipi su tutto il progetto, test compresi |
-| `npm run lint` | ESLint con Prettier (corregge da solo quello che può) |
+| `npm run lint` | oxlint |
 | `npm run build` | Compila in `dist/` |
 
 ## Struttura

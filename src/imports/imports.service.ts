@@ -2,16 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { EventsRepository } from '../data/events.repository';
 import { VenuesRepository } from '../data/venues.repository';
 
-interface PromoterBFeed {
-  events: {
-    ref: string;
-    name: string;
-    startsAt: string;
-    venueCode: string;
-    prices: { sector: string; amount: number }[];
-  }[];
-}
-
 export interface ImportResult {
   imported: string[];
   skipped: { row: number; reason: string }[];
@@ -70,7 +60,7 @@ export class ImportsService {
 
   importPromoterB(json: string): ImportResult {
     const result: ImportResult = { imported: [], skipped: [] };
-    const data = JSON.parse(json) as PromoterBFeed;
+    const data = JSON.parse(json);
     for (let i = 0; i < data.events.length; i++) {
       const e = data.events[i];
       const code = e.ref;

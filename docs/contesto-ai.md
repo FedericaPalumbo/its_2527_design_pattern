@@ -3,7 +3,7 @@
 Se usi un assistente che non legge `AGENTS.md` (una chat nel browser, per esempio), copia il blocco qui sotto all'inizio della conversazione. Poi incolla il ticket e i file su cui stai lavorando.
 
 ```text
-Sto lavorando a TicketHub, un'app NestJS 11 su Express in TypeScript, con la configurazione standard della CLI di NestJS. I test sono con Jest e supertest. Vende biglietti per eventi: eventi, locali con posti numerati e in piedi, ordini, pagamenti, biglietti, varchi d'ingresso, import degli eventi dai promoter. Non c'è database, i dati stanno in repository in memoria.
+Sto lavorando a TicketHub, un'app NestJS 12 su Express in TypeScript, generata con la CLI di NestJS in modalità CommonJS: import senza estensione, test con Jest e supertest. Vende biglietti per eventi: eventi, locali con posti numerati e in piedi, ordini, pagamenti, biglietti, varchi d'ingresso, import degli eventi dai promoter. Non c'è database, i dati stanno in repository in memoria.
 
 Regole:
 - lavoro in TDD: prima il test che fallisce, poi il codice minimo, poi il refactoring;
