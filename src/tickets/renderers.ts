@@ -1,4 +1,4 @@
-import type { EventRecord, Ticket, Venue } from '../data/types.js';
+import type { EventRecord, Ticket, Venue } from '../data/types';
 
 export class HtmlTicketRenderer {
   constructor(

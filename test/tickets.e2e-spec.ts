@@ -1,6 +1,6 @@
 import type { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { createApp, GOOD_CARD } from './helpers.js';
+import { createApp, GOOD_CARD } from './helpers';
 
 // Un solo acquisto per tutto il file: lo stesso posto non si può ricomprare.
 describe('Biglietti', () => {

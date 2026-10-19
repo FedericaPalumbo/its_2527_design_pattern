@@ -6,9 +6,9 @@ import {
   Gatekeeper,
   type GkDecision,
   type GkScanEvent,
-} from '../../vendor/gatekeeper/index.js';
-import { TicketsRepository } from '../data/tickets.repository.js';
-import { checksum } from '../tickets/tickets.service.js';
+} from '../../vendor/gatekeeper';
+import { TicketsRepository } from '../data/tickets.repository';
+import { checksum } from '../tickets/tickets.service';
 
 @Injectable()
 export class GatesService implements OnModuleInit {

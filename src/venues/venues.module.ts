@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { VenuesController } from './venues.controller.js';
+import { VenuesController } from './venues.controller';
 
 @Module({
   controllers: [VenuesController],

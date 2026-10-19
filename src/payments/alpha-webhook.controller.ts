@@ -1,7 +1,7 @@
 import { Body, Controller, Headers, HttpCode, Post, UnauthorizedException } from '@nestjs/common';
-import { AlphaWebhook, type AlphaWebhookEvent } from '../../vendor/alpha-pay/index.js';
-import { OrdersRepository } from '../data/orders.repository.js';
-import { TicketsRepository } from '../data/tickets.repository.js';
+import { AlphaWebhook, type AlphaWebhookEvent } from '../../vendor/alpha-pay';
+import { OrdersRepository } from '../data/orders.repository';
+import { TicketsRepository } from '../data/tickets.repository';
 
 @Controller('payments/alpha')
 export class AlphaWebhookController {

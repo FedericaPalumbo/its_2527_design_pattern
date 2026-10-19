@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { MailerService } from '../src/notifications/mailer.service.js';
-import { createApp, DECLINED_CARD, GOOD_CARD, SLOW_CARD } from './helpers.js';
+import { MailerService } from '../src/notifications/mailer.service';
+import { createApp, DECLINED_CARD, GOOD_CARD, SLOW_CARD } from './helpers';
 
 // NB: l'inventario dei posti non si azzera tra un test e l'altro,
 // quindi ogni test usa posti diversi.

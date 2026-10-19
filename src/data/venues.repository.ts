@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { seedVenues } from './seed.js';
-import type { Venue } from './types.js';
+import { seedVenues } from './seed';
+import type { Venue } from './types';
 
 @Injectable()
 export class VenuesRepository {

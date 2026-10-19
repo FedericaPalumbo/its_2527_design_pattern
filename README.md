@@ -10,6 +10,7 @@ Serve Node 24 (la versione è in `.nvmrc`).
 nvm use
 npm ci
 npm test
+npm run test:e2e
 npm run start:dev
 ```
 

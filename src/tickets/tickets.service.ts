@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { EventsRepository } from '../data/events.repository.js';
-import { TicketsRepository } from '../data/tickets.repository.js';
-import type { Order, Ticket, Venue } from '../data/types.js';
-import { VenuesRepository } from '../data/venues.repository.js';
-import { round2 } from '../shared/money.js';
-import { HtmlTicketRenderer, TextTicketRenderer } from './renderers.js';
+import { EventsRepository } from '../data/events.repository';
+import { TicketsRepository } from '../data/tickets.repository';
+import type { Order, Ticket, Venue } from '../data/types';
+import { VenuesRepository } from '../data/venues.repository';
+import { round2 } from '../shared/money';
+import { HtmlTicketRenderer, TextTicketRenderer } from './renderers';
 
 export function checksum(id: string): string {
   let sum = 0;

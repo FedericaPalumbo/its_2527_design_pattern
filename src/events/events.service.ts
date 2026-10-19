@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { EventsRepository } from '../data/events.repository.js';
-import type { EventRecord } from '../data/types.js';
+import { EventsRepository } from '../data/events.repository';
+import type { EventRecord } from '../data/types';
 
 @Injectable()
 export class EventsService {

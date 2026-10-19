@@ -1,9 +1,9 @@
 import { Global, Module } from '@nestjs/common';
-import { EventsRepository } from './events.repository.js';
-import { OrdersRepository } from './orders.repository.js';
-import { TicketsRepository } from './tickets.repository.js';
-import { UsersRepository } from './users.repository.js';
-import { VenuesRepository } from './venues.repository.js';
+import { EventsRepository } from './events.repository';
+import { OrdersRepository } from './orders.repository';
+import { TicketsRepository } from './tickets.repository';
+import { UsersRepository } from './users.repository';
+import { VenuesRepository } from './venues.repository';
 
 @Global()
 @Module({

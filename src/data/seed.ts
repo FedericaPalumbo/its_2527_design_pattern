@@ -1,4 +1,4 @@
-import type { EventRecord, Seat, User, Venue } from './types.js';
+import type { EventRecord, Seat, User, Venue } from './types';
 
 function numberedSector(sector: string, rows: number, seatsPerRow: number): Seat[] {
   const seats: Seat[] = [];

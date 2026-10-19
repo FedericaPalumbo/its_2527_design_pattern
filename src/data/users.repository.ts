@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { seedUsers } from './seed.js';
-import type { User } from './types.js';
+import { seedUsers } from './seed';
+import type { User } from './types';
 
 @Injectable()
 export class UsersRepository {

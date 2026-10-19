@@ -11,17 +11,17 @@ import {
   Post,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { type AlphaCharge, AlphaPayClient, AlphaTimeoutError } from '../../vendor/alpha-pay/index.js';
-import { EventsRepository } from '../data/events.repository.js';
-import { OrdersRepository } from '../data/orders.repository.js';
-import { TicketsRepository } from '../data/tickets.repository.js';
-import type { Order, OrderItem } from '../data/types.js';
-import { UsersRepository } from '../data/users.repository.js';
-import { VenuesRepository } from '../data/venues.repository.js';
-import { SeatInventory } from '../inventory/seat-inventory.js';
-import { MailerService } from '../notifications/mailer.service.js';
-import { round2 } from '../shared/money.js';
-import { TicketsService } from '../tickets/tickets.service.js';
+import { type AlphaCharge, AlphaPayClient, AlphaTimeoutError } from '../../vendor/alpha-pay';
+import { EventsRepository } from '../data/events.repository';
+import { OrdersRepository } from '../data/orders.repository';
+import { TicketsRepository } from '../data/tickets.repository';
+import type { Order, OrderItem } from '../data/types';
+import { UsersRepository } from '../data/users.repository';
+import { VenuesRepository } from '../data/venues.repository';
+import { SeatInventory } from '../inventory/seat-inventory';
+import { MailerService } from '../notifications/mailer.service';
+import { round2 } from '../shared/money';
+import { TicketsService } from '../tickets/tickets.service';
 
 interface CreateOrderBody {
   eventId: string;

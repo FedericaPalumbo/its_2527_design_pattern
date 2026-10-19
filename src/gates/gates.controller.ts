@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
-import type { GkDecision } from '../../vendor/gatekeeper/index.js';
-import { GatesService } from './gates.service.js';
+import type { GkDecision } from '../../vendor/gatekeeper';
+import { GatesService } from './gates.service';
 
 @Controller('gates')
 export class GatesController {

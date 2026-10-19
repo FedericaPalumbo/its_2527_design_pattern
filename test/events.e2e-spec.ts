@@ -1,6 +1,6 @@
 import type { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { createApp } from './helpers.js';
+import { createApp } from './helpers';
 
 describe('Eventi', () => {
   let app: INestApplication;

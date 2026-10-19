@@ -1,7 +1,7 @@
 import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
-import { EventsRepository } from '../data/events.repository.js';
-import { VenuesRepository } from '../data/venues.repository.js';
-import { SeatInventory } from '../inventory/seat-inventory.js';
+import { EventsRepository } from '../data/events.repository';
+import { VenuesRepository } from '../data/venues.repository';
+import { SeatInventory } from '../inventory/seat-inventory';
 
 interface SectorMap {
   sector: string;

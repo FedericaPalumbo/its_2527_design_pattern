@@ -2,7 +2,7 @@
 
 ## Il progetto
 
-TicketHub vende biglietti per concerti ed eventi. È un'applicazione NestJS 12 su Express, scritta in TypeScript, senza database: i dati stanno in repository in memoria e ripartono dal seed a ogni avvio.
+TicketHub vende biglietti per concerti ed eventi. È un'applicazione NestJS 11 su Express, scritta in TypeScript, senza database: i dati stanno in repository in memoria e ripartono dal seed a ogni avvio.
 
 Il codice ha qualche anno e diversi problemi noti, elencati in `DEBITO.md`. Le regole qui sotto valgono per il codice nuovo e per quello che si modifica. Il resto si sistema un ticket alla volta.
 
@@ -26,11 +26,10 @@ Il codice ha qualche anno e diversi problemi noti, elencati in `DEBITO.md`. Le r
 | Comando | Cosa fa |
 |---|---|
 | `npm run start:dev` | Avvia l'app in watch su http://localhost:3000 |
-| `npm test` | Tutti i test |
-| `npm run test:unit` | Solo i test unitari (`src/**/*.spec.ts`) |
-| `npm run test:e2e` | Solo i test e2e (`test/**/*.e2e-spec.ts`) |
+| `npm test` | Test unitari con Jest (`src/**/*.spec.ts`) |
+| `npm run test:e2e` | Test e2e con Jest e supertest (`test/**/*.e2e-spec.ts`) |
 | `npm run typecheck` | Controllo dei tipi su tutto il progetto, test compresi |
-| `npm run lint` | oxlint |
+| `npm run lint` | ESLint con Prettier (corregge da solo quello che può) |
 | `npm run build` | Compila in `dist/` |
 
 ## Struttura
@@ -45,7 +44,6 @@ Il codice ha qualche anno e diversi problemi noti, elencati in `DEBITO.md`. Le r
 ## Convenzioni
 
 - Identificatori in inglese. Messaggi d'errore, commenti e messaggi di commit in italiano.
-- Moduli ESM: negli import relativi si scrive l'estensione `.js`, per esempio `import { X } from './x.js'`.
 - Interfacce e alias di tipo presi da altri file si importano con `import type`, altrimenti i file con `@Controller` o `@Injectable` non compilano.
 - Le classi che arrivano dal costruttore (service, repository) si importano con un import normale. Con `import type` la DI di Nest non le trova, e l'errore compare solo all'avvio.
 - Le dipendenze arrivano dal costruttore tramite la DI di NestJS. Nel codice nuovo niente `new` su service e repository.
@@ -54,9 +52,9 @@ Il codice ha qualche anno e diversi problemi noti, elencati in `DEBITO.md`. Le r
 ## Come si lavora
 
 - TDD: prima un test che fallisce, poi il codice minimo per farlo passare, poi il refactoring con i test verdi.
-- Commit piccoli: ogni commit lascia `npm test` verde.
+- Commit piccoli: ogni commit lascia verdi `npm test` e `npm run test:e2e`.
 - Lo scope è il ticket in `tickets/`. Niente refactoring del codice che il ticket non tocca: se trovi un problema fuori scope, aggiungi una riga a `DEBITO.md` e vai avanti.
 - Niente astrazioni che il ticket non richiede. Un'interfaccia con una sola implementazione deve avere un motivo scritto nel ticket.
 - Niente dipendenze npm nuove senza chiedere.
 - I test esistenti non si modificano per farli passare. Se un test descrive un comportamento che il ticket chiede di cambiare, dillo esplicitamente.
-- Prima di dichiarare finito un lavoro devono passare `npm test`, `npm run typecheck`, `npm run lint` e `npm run build`.
+- Prima di dichiarare finito un lavoro devono passare `npm test`, `npm run test:e2e`, `npm run typecheck`, `npm run lint` e `npm run build`.

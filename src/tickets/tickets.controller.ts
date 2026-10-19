@@ -1,9 +1,9 @@
 import { BadRequestException, Controller, Get, NotFoundException, Param, Query, Res } from '@nestjs/common';
 import type { Response } from 'express';
-import { EventsRepository } from '../data/events.repository.js';
-import { TicketsRepository } from '../data/tickets.repository.js';
-import { VenuesRepository } from '../data/venues.repository.js';
-import { HtmlTicketRenderer, TextTicketRenderer } from './renderers.js';
+import { EventsRepository } from '../data/events.repository';
+import { TicketsRepository } from '../data/tickets.repository';
+import { VenuesRepository } from '../data/venues.repository';
+import { HtmlTicketRenderer, TextTicketRenderer } from './renderers';
 
 @Controller('tickets')
 export class TicketsController {

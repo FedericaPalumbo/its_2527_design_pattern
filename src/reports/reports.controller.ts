@@ -1,8 +1,8 @@
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { EventsRepository } from '../data/events.repository.js';
-import { OrdersRepository } from '../data/orders.repository.js';
-import { VenuesRepository } from '../data/venues.repository.js';
-import { SeatInventory } from '../inventory/seat-inventory.js';
+import { EventsRepository } from '../data/events.repository';
+import { OrdersRepository } from '../data/orders.repository';
+import { VenuesRepository } from '../data/venues.repository';
+import { SeatInventory } from '../inventory/seat-inventory';
 
 @Controller('events')
 export class ReportsController {
