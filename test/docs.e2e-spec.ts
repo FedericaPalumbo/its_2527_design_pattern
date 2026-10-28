@@ -52,4 +52,15 @@ describe('Documentazione OpenAPI', () => {
     expect(body.$ref).toBe(`#/components/schemas/${dto}`);
     expect(Object.keys(doc.components.schemas[dto].properties).length).toBeGreaterThan(0);
   });
+
+  it.each([
+    ['/orders', 'x-user-id', false],
+    ['/payments/alpha/webhook', 'alpha-signature', true],
+  ])('documenta su %s l\'header %s', (path, name, required) => {
+    const params = doc.paths[path].post.parameters ?? [];
+    const header = params.find((p: { in: string; name: string }) => p.in === 'header' && p.name === name);
+    expect(header).toBeDefined();
+    expect(header.required).toBe(required);
+    expect(header.description).toEqual(expect.any(String));
+  });
 });

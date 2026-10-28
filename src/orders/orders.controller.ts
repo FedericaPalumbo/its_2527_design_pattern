@@ -11,6 +11,7 @@ import {
   Post,
   ServiceUnavailableException,
 } from '@nestjs/common';
+import { ApiHeader } from '@nestjs/swagger';
 import { type AlphaCharge, AlphaPayClient, AlphaTimeoutError } from '../../vendor/alpha-pay';
 import { EventsRepository } from '../data/events.repository';
 import { OrdersRepository } from '../data/orders.repository';
@@ -37,6 +38,11 @@ export class OrdersController {
   ) {}
 
   @Post()
+  @ApiHeader({
+    name: 'x-user-id',
+    required: false,
+    description: "Utente che compra (es. u-cust-1). Senza, l'ordine è da ospite e serve l'email nel body",
+  })
   async create(@Body() body: CreateOrderDto, @Headers('x-user-id') userId?: string) {
     const event = this.events.findById(body.eventId);
     if (!event) throw new NotFoundException('evento non trovato');
