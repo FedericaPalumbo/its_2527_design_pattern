@@ -22,14 +22,7 @@ import { SeatInventory } from '../inventory/seat-inventory';
 import { MailerService } from '../notifications/mailer.service';
 import { round2 } from '../shared/money';
 import { TicketsService } from '../tickets/tickets.service';
-
-interface CreateOrderBody {
-  eventId: string;
-  seats: { seatId: string; quantity?: number }[];
-  card: string;
-  holderName: string;
-  email?: string;
-}
+import { CreateOrderDto } from './create-order.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -44,7 +37,7 @@ export class OrdersController {
   ) {}
 
   @Post()
-  async create(@Body() body: CreateOrderBody, @Headers('x-user-id') userId?: string) {
+  async create(@Body() body: CreateOrderDto, @Headers('x-user-id') userId?: string) {
     const event = this.events.findById(body.eventId);
     if (!event) throw new NotFoundException('evento non trovato');
     if (event.status !== 'on_sale') throw new BadRequestException('evento non in vendita');

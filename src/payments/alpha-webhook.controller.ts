@@ -1,7 +1,8 @@
 import { Body, Controller, Headers, HttpCode, Post, UnauthorizedException } from '@nestjs/common';
-import { AlphaWebhook, type AlphaWebhookEvent } from '../../vendor/alpha-pay';
+import { AlphaWebhook } from '../../vendor/alpha-pay';
 import { OrdersRepository } from '../data/orders.repository';
 import { TicketsRepository } from '../data/tickets.repository';
+import { AlphaWebhookDto } from './alpha-webhook.dto';
 
 @Controller('payments/alpha')
 export class AlphaWebhookController {
@@ -12,7 +13,7 @@ export class AlphaWebhookController {
 
   @Post('webhook')
   @HttpCode(200)
-  handle(@Body() event: AlphaWebhookEvent, @Headers('alpha-signature') signature?: string) {
+  handle(@Body() event: AlphaWebhookDto, @Headers('alpha-signature') signature?: string) {
     const secret = process.env.ALPHA_WEBHOOK_SECRET ?? 'whsec_tickethub';
     if (!signature || !AlphaWebhook.verify(event, signature, secret)) {
       throw new UnauthorizedException('firma non valida');
