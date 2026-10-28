@@ -24,7 +24,11 @@ import { MailerService } from '../notifications/mailer.service';
 import { round2 } from '../shared/money';
 import { TicketsService } from '../tickets/tickets.service';
 import { CreateOrderDto } from './create-order.dto';
-
+import {
+  EARLY_BIRD_LIMIT,
+  earlyBirdPrice,
+  isEarlyBirdActive,
+} from '../shared/early-bird';
 @Controller('orders')
 export class OrdersController {
   constructor(
@@ -55,6 +59,7 @@ export class OrdersController {
 
     const inventory = SeatInventory.getInstance();
     const items: OrderItem[] = [];
+     let soldCount = this.tickets.countByEvent(event.id);
     for (const requested of body.seats) {
       const seat = venue.seats.find((s) => s.id === requested.seatId);
       if (!seat) throw new BadRequestException('posto inesistente: ' + requested.seatId);
@@ -83,15 +88,42 @@ export class OrdersController {
         default:
           throw new BadRequestException('tipo di prezzo non gestito');
       }
-      const fee = round2(unitPrice * 0.12);
-      let lineTotal: number;
-      if (seat.kind === 'standing') {
-        // per i posti in piedi la commissione si calcola direttamente sul totale, il risultato è lo stesso
-        lineTotal = round2(unitPrice * qty * 1.12);
-      } else {
-        lineTotal = round2(unitPrice + fee);
+      
+        const addItem = (quantity: number, price: number) => {
+        const fee = round2(price * 0.12);
+        const lineTotal =
+          seat.kind === 'standing'
+            ? round2(price * quantity * 1.12)
+            : round2(price + fee);
+
+        items.push({
+          seatId: seat.id,
+          sector: seat.sector,
+          quantity,
+          unitPrice: price,
+          fee,
+          lineTotal,
+        });
+      };
+
+      const discountedQuantity = isEarlyBirdActive(event.id, soldCount)
+        ? Math.min(qty, EARLY_BIRD_LIMIT - soldCount)
+        : 0;
+      const fullPriceQuantity = qty - discountedQuantity;
+
+      if (discountedQuantity > 0) {
+        const price = earlyBirdPrice(event.id, unitPrice, soldCount + 1);
+        addItem(discountedQuantity, price);
       }
-      items.push({ seatId: seat.id, sector: seat.sector, quantity: qty, unitPrice, fee, lineTotal });
+
+      if (fullPriceQuantity > 0) {
+        const firstFullPriceOrdinal = soldCount + discountedQuantity + 1;
+        const price = earlyBirdPrice(event.id, unitPrice, firstFullPriceOrdinal);
+        addItem(fullPriceQuantity, price);
+      }
+
+      soldCount += qty;
+
     }
     let total = 0;
     for (const it of items) total += it.lineTotal;

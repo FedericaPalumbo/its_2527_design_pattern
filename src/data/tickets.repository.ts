@@ -22,4 +22,8 @@ export class TicketsRepository {
   findByOrder(orderId: string): Ticket[] {
     return [...this.tickets.values()].filter((t) => t.orderId === orderId);
   }
+  countByEvent(eventId: string): number {
+    return [...this.tickets.values()].filter((ticket) => ticket.eventId === eventId).length;
+  }
+  //countByEvent restituisce quanti biglietti sono stati emessi per l’evento. Conta anche quelli con stato void: quando un ordine viene annullato, il biglietto viene invalidato ma resta nel repository, quindi la vendita continua a occupare una posizione nella soglia dei primi 500.
 }
