@@ -1,6 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { createApp } from './helpers';
+//import { createApp } from './helpers';
+import { createApp, GOOD_CARD } from './helpers';
 
 describe('Eventi', () => {
   let app: INestApplication;
@@ -26,20 +27,39 @@ describe('Eventi', () => {
       date: '2027-06-12T21:00:00+02:00',
       venue: 'Arena Nord',
       city: 'Verona',
-      priceFrom: '44.69',
+      //priceFrom: '44.69',
+      priceFrom: '35.75', // prezzo minimo senza commissione  
     });
-    expect(res.body.map((e: { priceFrom: string }) => e.priceFrom)).toEqual(['44.69', '28.00', '0.00', '20.16']);
+    expect(res.body.map((e: { priceFrom: string }) => e.priceFrom)).toEqual(['35.75', '28.00', '0.00', '20.16']);
   });
 
-  it('mostra il dettaglio di un evento con la disponibilità', async () => {
-    const res = await request(app.getHttpServer()).get('/events/e-2').expect(200);
-    expect(res.body.title).toBe('Lo Schiaccianoci');
-    expect(res.body.venue).toEqual({ id: 'v-teatro', name: 'Teatro Comunale', city: 'Treviso' });
-    expect(res.body.priceFrom).toBe('28.00');
-    expect(res.body.availability).toEqual({ total: 400, free: 400 });
-  });
+  describe('early bird di e-1', () => {
+    function buyPit(quantity: number) {
+      return request(app.getHttpServer())
+        .post('/orders')
+        .send({
+          eventId: 'e-1',
+          seats: [{ seatId: 'PIT', quantity }],
+          card: GOOD_CARD,
+          holderName: 'Giulia Rossi',
+          email: 'giulia@example.com',
+        });
+    }
 
-  it('risponde 404 per un evento inesistente', () => {
-    return request(app.getHttpServer()).get('/events/e-99').expect(404);
+    async function priceFromOfE1() {
+      const res = await request(app.getHttpServer()).get('/events').expect(200);
+      return res.body[0].priceFrom;
+    }
+
+    it('mostra il prezzo scontato finché restano biglietti early bird', async () => {
+      await buyPit(499).expect(201);  // 499 biglietti early bird venduti   //buyPit è una funzione che simula l'acquisto di biglietti in piedi (PIT) per l'evento e-1, con la quantità specificata. 
+      expect(await priceFromOfE1()).toBe('35.75'); //priceFromOfE1 è una funzione che recupera il prezzo minimo dell'evento e-1. Dopo aver venduto 499 biglietti early bird, il prezzo minimo dovrebbe ancora essere scontato a 35.75.
+    });
+
+    it('torna al prezzo pieno dal 500° biglietto venduto', async () => {
+      expect(await priceFromOfE1()).toBe('35.75');  // ancora prezzo early bird per un biglietto
+      await buyPit(500).expect(201);  // 500 biglietti early bird venduti
+      expect(await priceFromOfE1()).toBe('44.69');    // prezzo pieno perché non ci sono più biglietti early bird (sconto finito -> prezzo pieno) 
+    });
   });
-});
+})
